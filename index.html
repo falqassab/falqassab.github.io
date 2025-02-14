@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     <title>Happy Birthday!</title>
     <style>
         body {
@@ -11,11 +12,15 @@
             font-family: Arial, sans-serif;
             transition: background 1s;
             overflow: hidden;
+            margin:0;
+            padding:0;
         }
         #container {
             display: none;
             opacity: 0;
             transition: opacity 2s ease-in;
+            margin: auto;
+            max-width: 90%;
         }
         h1 {
             font-family: cursive;
