@@ -20,11 +20,12 @@
             opacity: 0;
             transition: opacity 2s ease-in;
             margin: auto;
-            max-width: 90%;
+            width: 90%;
+            max-width: 500px; /* Limit width on larger screens */
         }
         h1 {
             font-family: cursive;
-            font-size: 50px;
+            font-size: clamp(28px, 5vw, 50px); /* Adjusts font size based on screen width */
             color: white;
             position: relative;
             z-index: 2;
@@ -33,6 +34,8 @@
         p {
             font-family: 'Courier New', monospace;
             font-weight: normal;
+            font-size: clamp(16px, 4vw, 30px);
+            padding: 10px;
         }
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -48,8 +51,10 @@
         }
         .balloon {
             position: absolute;
-            width: 50px;
-            height: 70px;
+            width: 8vw;  /* Scale size based on screen width */
+            height: 12vw;
+            max-width: 50px;
+            max-height: 70px;
             background: red;
             border-radius: 50%;
             bottom: -100px;
@@ -61,7 +66,8 @@
         }
         button {
             padding: 10px 10px;
-            font-size: 20px;
+            font-size: clamp(14px, 4vw, 20px); /* Responsive font size */
+            max-width: 90%;
             background: white;
             color: black;
             border: none;
@@ -77,14 +83,16 @@
         }
         #first-of-type {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 80%;
 }
 
         #birthday-gif {
     display: none;
-    width: 300px;
+    width: 80%; /* Make it scale with the screen */
+    max-width: 300px;
     margin-top: 20px;
     border: 10px solid white; /* Thick white border */
     border-radius: 20px; /* Rounded corners */
@@ -116,7 +124,8 @@
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 1s ease-in, transform 1s ease-in;
-    font-size: 30px; /* Larger text */
+    font-size: clamp(16px, 4vw, 30px);
+            padding: 10px;
     font-family: 'Courier New', monospace;
     font-weight: bold;
     text-align: center;
