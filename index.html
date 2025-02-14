@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: black;
+            font-family: Arial, sans-serif;
+            transition: background 1s;
+            overflow: hidden;
+        }
+        #container {
+            display: none;
+            opacity: 0;
+            transition: opacity 2s ease-in;
+        }
+        h1 {
+            font-family: cursive;
+            font-size: 50px;
+            color: white;
+            position: relative;
+            z-index: 2;
+            animation: pulse 2s infinite;
+        }
+        p {
+            font-family: 'Courier New', monospace;
+            font-weight: normal;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        #balloons {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: none;
+        }
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background: red;
+            border-radius: 50%;
+            bottom: -100px;
+            animation: float 5s infinite ease-in;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh); }
+            100% { transform: translateY(-100vh); }
+        }
+        button {
+            padding: 10px 10px;
+            font-size: 20px;
+            background: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            position: relative;
+            z-index: 2;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        #first-of-type {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+        #birthday-gif {
+    display: none;
+    width: 300px;
+    margin-top: 20px;
+    border: 10px solid white; /* Thick white border */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.8); /* Glowing golden effect */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    0% { box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.5); }
+    100% { box-shadow: 0px 0px 20px rgba(255, 215, 0, 1); }
+}
+
+
+        #message-container {
+    display: none;
+    color: white;
+    font-size: 28px; /* Bigger text */
+    font-family: 'Cursive', sans-serif; /* Nice font */
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 2s ease-in;
+}
+
+.row.message p {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-in, transform 1s ease-in;
+    font-size: 30px; /* Larger text */
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(255, 255, 91); /* Highlighted for visibility */
+}
+
+    </style>
+</head>
+<body>
+    <button id ="first-of-type" onclick="turnLight()">Turn Light On 🎂</button>
+    <div id="balloons"></div>
+    <div id="container">
+        <h1>🎉 Happy Birthday Fatooma! 🎂</h1>
+        <p>Wishing you a day filled with love and joy!</p>
+        <img id="birthday-gif" src="https://media1.tenor.com/m/tPJaogUqo8wAAAAC/happy-birthday.gif" alt="Happy Birthday GIF">
+        <button onclick="showMessage()">Open Letter 💌</button>
+        <div id="popup" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 500px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.3); text-align: center; color: black;">
+            <button onclick="closePopup()" style="position: absolute; top: 10px; right: 10px; background: red; color: white; border: none; padding: 5px 10px; cursor: pointer;">X</button>
+            <div id="popup-content"></div>
+        </div>
+        <div id="message-container"></div>
+    </div>
+    <script>
+function turnLight() {
+    document.body.style.backgroundColor = "pink";
+    document.getElementById("container").style.display = "block";
+    document.getElementById("container").style.opacity = "1";
+    document.getElementById("balloons").style.display = "block";
+    document.getElementById("birthday-gif").style.display = "block";
+    document.querySelector("button").style.display = "none"; // Hides the button
+    playMusic();
+    createBalloons();
+}
+
+        
+        function playMusic() {
+    let audio = new Audio('music/a-birthday-to-remember.mp3');
+    audio.play();
+}
+
+        
+        function createBalloons() {
+            const balloonContainer = document.getElementById("balloons");
+            for (let i = 0; i < 20; i++) {
+                let balloon = document.createElement("div");
+                balloon.className = "balloon";
+                balloon.style.left = Math.random() * 100 + "%";
+                balloon.style.animationDuration = (Math.random() * 3 + 3) + "s";
+                balloonContainer.appendChild(balloon);
+            }
+        }
+        
+        function showMessage() {
+    let messageContainer = document.getElementById("message-container");
+    messageContainer.innerHTML = `<div class="row message">
+        <div class="col-md-12">
+            <p id="message-text"></p>
+        </div>
+    </div>`;
+    
+    messageContainer.style.display = "block";
+    messageContainer.style.opacity = "1";
+
+    let index = 0;
+    const lines = [
+        "Today is...", "as beautiful as other days", "but you realize", "another year has gone", "in a blink of the eyes",
+        "<strong>however</strong>", "Do you know..?", "today is just special", "so special to you", "that's why",
+        "Let's make it...", "the best celebration ever", "and let me share...", "a piece of happiness to you", "I made all this...",
+        "as a birthday present to you", "thanks for the friendship we made", "thanks for everything", "I wish you all the best",
+        "May your life be at ease", "May all your wishes come true", "Remember", "your ambitions", "you live as a free bird...",
+        "flying in the blue sky", "enjoy every single moment...", "that you experience today", "fill it with your most beautiful smile", "and make it the best memory..","lastly...", "I'd like to wish you one more time",
+         "a very happy birthday ", "Sweet 27!", " ♡.♡ كل عام وانتين بألف خير فطومة"
+    ];
+
+    function showNextLine() {
+        if (index >= lines.length) {
+            return;
+        }
+
+        let textElement = document.getElementById("message-text");
+        textElement.style.opacity = "0"; // Fade out old text
+        setTimeout(() => {
+            textElement.innerHTML = lines[index]; // Change text
+            textElement.style.opacity = "1"; // Fade in new text
+            index++;
+            setTimeout(showNextLine, 2000); // Show next line after 2 seconds
+        }, 500); // Wait for fade-out animation
+    }
+
+    showNextLine(); // Start animation
+}
+
+
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+        
+        function getMessageLine(index) {
+            const lines = [
+                "Today is...", "as beautiful as other days", "but you realize", "another year has gone", "in a blink of the eyes",
+                "<strong>however</strong>", "Do you know..?", "today is just special", "so special to you", "that's why",
+                "Let's make it...", "the best celebration ever", "and let me share...", "a piece of happiness to you", "I made all this...",
+                "as a birthday present to you", "thanks for the friendship we made", "thanks for everything", "I wish you all the best",
+                "May your life be at ease", "May all your wishes come true", "Remember", "your ambitions", "you live as a free bird...",
+                "flying in the blue sky"
+            ];
+            return lines[index] || "";
+        }
+    </script>
+</body>
+</html>
